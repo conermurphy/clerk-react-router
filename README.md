@@ -1,100 +1,25 @@
-# Welcome to React Router!
+# Welcome to Notify
 
-A modern, production-ready template for building full-stack React applications using React Router.
+![Notify Demo](notify-demo.gif)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Notify is a small example note taking application that demonstrates how to connect React Router (Framework) and Clerk.
 
 ## Getting Started
 
-### Installation
+- Clone this repo
+- Install the dependencies (`npm i`)
+- [ Sign up for a Clerk account](https://dashboard.clerk.com/sign-up) (If you don't already have one)
+- Copy `.env.example` to `.env` and populate your Clerk secret and publishable keys
+- Start the app with `npm run dev`
 
-Install the dependencies:
+## Tools Used
 
-```bash
-npm install
-```
+- React Router (Framework)
+- Clerk (Auth)
+- SQLite (Database)
+- Drizzle (ORM)
+- Tailwind (Styling)
 
-### Development
+## Questions / Support
 
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-This template includes three Dockerfiles optimized for different package managers:
-
-- `Dockerfile` - for npm
-- `Dockerfile.pnpm` - for pnpm
-- `Dockerfile.bun` - for bun
-
-To build and run using Docker:
-
-```bash
-# For npm
-docker build -t my-app .
-
-# For pnpm
-docker build -f Dockerfile.pnpm -t my-app .
-
-# For bun
-docker build -f Dockerfile.bun -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+If you have any questions or need any help, feel free to open an issue on this repository. Or, [get in contact with me.](https://conermurphy.com/contact)
