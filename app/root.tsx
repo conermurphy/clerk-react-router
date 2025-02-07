@@ -1,27 +1,34 @@
+import { rootAuthLoader } from '@clerk/react-router/ssr.server'
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "react-router";
+} from 'react-router'
 
-import type { Route } from "./+types/root";
-import "./app.css";
+import type { Route } from './+types/root'
+import './app.css'
+import { ClerkProvider } from '@clerk/react-router'
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
   },
   {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
   },
-];
+]
+
+export async function loader(args: Route.LoaderArgs) {
+  return rootAuthLoader(args)
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -38,38 +45,56 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
+  )
 }
 
-export default function App() {
-  return <Outlet />;
+export default function App({ loaderData }: Route.ComponentProps) {
+  return (
+    <ClerkProvider
+      loaderData={loaderData}
+      signUpFallbackRedirectUrl="/sign-up"
+      signInFallbackRedirectUrl="/sign-in"
+    >
+      <div className="flex min-h-screen items-center justify-center text-gray-800">
+        <Outlet />
+      </div>
+    </ClerkProvider>
+  )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
+  let message = 'Oops!'
+  let details = 'An unexpected error occurred.'
+  let stack: string | undefined
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
+    message = error.status === 404 ? '404' : 'Error'
     details =
       error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+        ? 'The requested page could not be found.'
+        : error.statusText || details
   } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
+    details = error.message
+    stack = error.stack
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
+    <main className="flex flex-col items-center justify-center gap-y-10 p-4 pt-16 text-gray-800">
+      <div className="flex flex-col items-center gap-y-2">
+        <h1 className="text-brand text-7xl">{message}</h1>
+        <p className="text-xl text-gray-800 italic">{details}</p>
+      </div>
+      <Link
+        to="/"
+        className="bg-light/50 hover:bg-light border-brand cursor-pointer rounded-md border-2 px-4 py-2 text-sm font-bold transition-colors duration-150 ease-in-out"
+      >
+        Go back to Notify
+      </Link>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="w-full overflow-x-auto p-4">
           <code>{stack}</code>
         </pre>
       )}
     </main>
-  );
+  )
 }
