@@ -5,6 +5,7 @@ import { db } from '~/db/config.server'
 import { notes } from '~/db/schema.server'
 import { createNoteSchema } from '~/schemas'
 import { NoteForm } from '~/components/note-form'
+import { parseWithZod } from '@conform-to/zod'
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -19,11 +20,13 @@ export async function action(args: Route.ActionArgs) {
   if (!userId) return redirect('/sign-in?redirect_url=' + args.request.url)
 
   const formData = await args.request.formData()
+  const submission = parseWithZod(formData, { schema: createNoteSchema })
 
-  const { title, content } = createNoteSchema.parse({
-    title: formData.get('title')?.toString(),
-    content: formData.get('content')?.toString(),
-  })
+  if (submission.status !== 'success') {
+    return submission.reply()
+  }
+
+  const { title, content } = submission.value
 
   const [createdNote] = await db
     .insert(notes)
