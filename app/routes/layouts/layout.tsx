@@ -1,7 +1,4 @@
-import { Link, NavLink, Outlet, redirect } from 'react-router'
-import { SignOutButton } from '@clerk/react-router'
-import { getAuth } from '@clerk/react-router/ssr.server'
-import { createClerkClient } from '@clerk/react-router/api.server'
+import { Link, NavLink, Outlet } from 'react-router'
 import { MdLogout } from 'react-icons/md'
 import { db } from '~/db/config.server'
 import { notes } from '~/db/schema.server'
@@ -9,23 +6,15 @@ import type { Route } from './+types/layout'
 import { desc, eq } from 'drizzle-orm'
 import { formatDistanceToNow } from 'date-fns'
 
-export async function loader(args: Route.LoaderArgs) {
-  const { userId } = await getAuth(args)
-
-  if (!userId) return redirect('/sign-in?redirect_url=' + args.request.url)
-
+export async function loader() {
   const allNotes = await db
     .select()
     .from(notes)
-    .where(eq(notes.authorId, userId))
+    .where(eq(notes.authorId, 'CLERK_USER_ID'))
     .orderBy(desc(notes.updatedAt))
 
-  const user = await createClerkClient({
-    secretKey: process.env.CLERK_SECRET_KEY,
-  }).users.getUser(userId)
-
   return {
-    userFullName: user.fullName,
+    userFullName: 'CLERK_USER_NAME',
     allNotes,
   }
 }
@@ -46,11 +35,9 @@ export default function AppLayout({
         >
           N
         </Link>
-        <SignOutButton>
-          <button className="cursor-pointer rounded-md bg-red-300 p-2.5 text-gray-800">
-            <MdLogout size={16} />
-          </button>
-        </SignOutButton>
+        <button className="cursor-pointer rounded-md bg-red-300 p-2.5 text-gray-800">
+          <MdLogout size={16} />
+        </button>
       </div>
 
       <aside className="col-span-3 grid h-full grid-rows-12 overflow-hidden border-r border-gray-300 bg-gray-100">

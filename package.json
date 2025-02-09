@@ -9,7 +9,6 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@clerk/react-router": "^1.0.5",
     "@conform-to/react": "^1.2.2",
     "@conform-to/zod": "^1.2.2",
     "@libsql/client": "^0.14.0",

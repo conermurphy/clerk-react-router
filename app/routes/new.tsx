@@ -1,4 +1,3 @@
-import { getAuth } from '@clerk/react-router/ssr.server'
 import { redirect } from 'react-router'
 import type { Route } from './+types/new'
 import { db } from '~/db/config.server'
@@ -15,10 +14,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action(args: Route.ActionArgs) {
-  const { userId } = await getAuth(args)
-
-  if (!userId) return redirect('/sign-in?redirect_url=' + args.request.url)
-
   const formData = await args.request.formData()
   const submission = parseWithZod(formData, { schema: createNoteSchema })
 
@@ -33,7 +28,7 @@ export async function action(args: Route.ActionArgs) {
     .values({
       title,
       content,
-      authorId: userId,
+      authorId: 'CLERK_USER_ID',
     })
     .returning()
 
