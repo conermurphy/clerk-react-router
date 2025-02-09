@@ -1,6 +1,6 @@
 import { Outlet, redirect } from 'react-router'
 import { getAuth } from '@clerk/react-router/ssr.server'
-import type { Route } from './+types/layout'
+import type { Route } from './+types/auth-layout'
 
 export async function loader(args: Route.LoaderArgs) {
   const { userId } = await getAuth(args)

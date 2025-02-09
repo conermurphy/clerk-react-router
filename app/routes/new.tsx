@@ -1,6 +1,6 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { redirect } from 'react-router'
-import type { Route } from './+types/home'
+import type { Route } from './+types/new'
 import { db } from '~/db/config.server'
 import { notes } from '~/db/schema.server'
 import { createNoteSchema } from '~/schemas'

@@ -1,5 +1,5 @@
 import { SignUp } from '@clerk/react-router'
-import type { Route } from './+types/home'
+import type { Route } from './+types/sign-up'
 
 export function meta({}: Route.MetaArgs) {
   return [

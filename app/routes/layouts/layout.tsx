@@ -5,7 +5,7 @@ import { createClerkClient } from '@clerk/react-router/api.server'
 import { MdLogout } from 'react-icons/md'
 import { db } from '~/db/config.server'
 import { notes } from '~/db/schema.server'
-import type { Route } from '../+types/layout'
+import type { Route } from './+types/layout'
 import { desc, eq } from 'drizzle-orm'
 import { formatDistanceToNow } from 'date-fns'
 
