@@ -50,11 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App({ loaderData }: Route.ComponentProps) {
   return (
-    <ClerkProvider
-      loaderData={loaderData}
-      signUpFallbackRedirectUrl="/sign-up"
-      signInFallbackRedirectUrl="/sign-in"
-    >
+    <ClerkProvider loaderData={loaderData}>
       <div className="flex min-h-screen items-center justify-center text-gray-800">
         <Outlet />
       </div>
