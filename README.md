@@ -1,8 +1,8 @@
-# Welcome to Notify
+# Welcome to Noted
 
-![Notify Demo](notify-demo.gif)
+![Noted Demo](noted-demo.gif)
 
-Notify is a small example note taking application that demonstrates how to connect React Router (Framework) and Clerk.
+Noted is a small example note taking application that demonstrates how to connect React Router (Framework) and Clerk.
 
 ## Getting Started
 

@@ -84,7 +84,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         to="/"
         className="bg-light/50 hover:bg-light border-brand cursor-pointer rounded-md border-2 px-4 py-2 text-sm font-bold transition-colors duration-150 ease-in-out"
       >
-        Go back to Notify
+        Go back to Noted
       </Link>
       {stack && (
         <pre className="w-full overflow-x-auto p-4">

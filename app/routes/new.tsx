@@ -9,8 +9,8 @@ import { parseWithZod } from '@conform-to/zod'
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'Notify | Create New Note' },
-    { name: 'description', content: 'Create a new note with Notify' },
+    { title: 'Noted | Create New Note' },
+    { name: 'description', content: 'Create a new note with Noted' },
   ]
 }
 

@@ -12,8 +12,8 @@ import { createClerkClient } from '@clerk/react-router/api.server'
 
 export function meta({ data: { note } }: Route.MetaArgs) {
   return [
-    { title: `Notify | ${note.title.slice(0, 30)}...` },
-    { name: 'description', content: 'View and edit your note with Notify' },
+    { title: `Noted | ${note.title.slice(0, 30)}...` },
+    { name: 'description', content: 'View and edit your note with Noted' },
   ]
 }
 

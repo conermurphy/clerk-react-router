@@ -2,8 +2,8 @@ import type { Route } from './+types/home'
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'Notify' },
-    { name: 'description', content: 'Welcome to Notify!' },
+    { title: 'Noted' },
+    { name: 'description', content: 'Welcome to Noted!' },
   ]
 }
 

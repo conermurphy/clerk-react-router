@@ -3,8 +3,8 @@ import type { Route } from './+types/sign-in'
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'Notify | Sign In' },
-    { name: 'description', content: 'Sign in to Notify!' },
+    { title: 'Noted | Sign In' },
+    { name: 'description', content: 'Sign in to Noted!' },
   ]
 }
 
