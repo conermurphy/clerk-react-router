@@ -1,5 +1,4 @@
 import { data, redirect } from 'react-router'
-import { getAuth } from '@clerk/react-router/ssr.server'
 import { db } from '~/db/config.server'
 import { notes } from '~/db/schema.server'
 import { createNoteSchema } from '~/schemas'
@@ -8,7 +7,6 @@ import type { Route } from './+types/:id'
 import { parseWithZod } from '@conform-to/zod'
 import { NoteForm } from '~/components/note-form'
 import { format } from 'date-fns'
-import { createClerkClient } from '@clerk/react-router/api.server'
 
 export function meta({ data: { note } }: Route.MetaArgs) {
   return [
@@ -18,10 +16,6 @@ export function meta({ data: { note } }: Route.MetaArgs) {
 }
 
 export async function action(args: Route.ActionArgs) {
-  const { userId } = await getAuth(args)
-
-  if (!userId) return redirect('/sign-in?redirect_url=' + args.request.url)
-
   const noteId = args.params.id
 
   if (!noteId) {
@@ -47,10 +41,6 @@ export async function action(args: Route.ActionArgs) {
 }
 
 export async function loader(args: Route.LoaderArgs) {
-  const { userId } = await getAuth(args)
-
-  if (!userId) return redirect('/sign-in?redirect_url=' + args.request.url)
-
   const noteId = args.params.id
 
   if (!noteId) {
@@ -63,11 +53,7 @@ export async function loader(args: Route.LoaderArgs) {
     throw data('Note not found', { status: 404 })
   }
 
-  const user = await createClerkClient({
-    secretKey: process.env.CLERK_SECRET_KEY,
-  }).users.getUser(userId)
-
-  return { note: { ...note, author: user.fullName } }
+  return { note: { ...note, author: 'CLERK_USER_NAME' } }
 }
 
 export default function UpdateNote({

@@ -11,8 +11,5 @@ export default [
     route('new', 'routes/new.tsx'),
     route(':id', 'routes/:id.tsx'),
   ]),
-  layout('./routes/layouts/auth-layout.tsx', [
-    route('sign-in/*', 'routes/sign-in.tsx'),
-    route('sign-up/*', 'routes/sign-up.tsx'),
-  ]),
+  layout('./routes/layouts/auth-layout.tsx', []),
 ] satisfies RouteConfig
